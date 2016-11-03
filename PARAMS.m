@@ -4,7 +4,6 @@ classdef PARAMS
 properties (Constant)
 REJECT_TEMP = 30 + 273;   % condenser rejection temp. (K)
 PEAK_PRES = 160;          % operating pres. of high-p turbine (bar)
-LOW_PRES = 1;             % pressure at high-p turbine exit (bar)
 PROC_HEAT_PRES = 6.89476; % process heat pressure (bar)
 
 DS_TEMP = REJECT_TEMP;  % dead state temperature (K)
