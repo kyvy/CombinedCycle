@@ -1,5 +1,6 @@
-function [massflowrate_b] = brayton_states(states)
+function [massflowrate_b] = brayton_states(states, energy)
 % Temperature on brayton cycle
+
 
 states(13).t = PARAMS.BRA_LOW_TEMP;
 
