@@ -18,7 +18,6 @@ energy.rankine = rankine_energy(a.states, a.massfrac)
 
 %% Destroyed Exergy
 [a.states, xdest] = rankine_exergies(a.states, energy.rankine)
-% rankine_destroyed_exergy(a.states, energy.rankine)
 
 %% Efficiencies
 
