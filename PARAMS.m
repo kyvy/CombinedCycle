@@ -24,8 +24,12 @@ ISEN_EFF_PUMP    = 0.75;
 ISEN_EFF_TURBINE = 0.90;  % can be 0.80, 0.85, 0.90
 
 % brayton cycle
-BRA_PRESR        = 16;   % pressure ratio on brayton cycle. (we can specify pressures later)
-BRA_PEAK_TEMP    = 2000; % peak temp on brayton cycle (K)
+BRA_PRESR        = 16;       % pressure ratio on brayton cycle. (we can specify pressures later)
+BRA_PEAK_TEMP    = 1500;     % peak temp on brayton cycle (K)
+BRA_LOW_TEMP     = 300;      % temp before compressor (K)
+BRA_MID_TEMP     = 420;      % temp at turine exit (K)
+CP_AIR           = 1.005;    % air cp at 300K (Kj/Kg.K)
+K_AIR            = 1.4; 
 
 % costs
 COST_TURBINE   = turbine_cost(PARAMS.ISEN_EFF_TURBINE);
