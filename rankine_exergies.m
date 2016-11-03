@@ -1,12 +1,16 @@
 function [states, xdest] = rankine_exergies(states, energy)
 % calculate exergy (psi) at each state and exergy destroyed
 
+% calculate exergy at each state
 psi = @(state) (state.h - PARAMS.DS_ENTHALPY) - PARAMS.DS_TEMP*(state.s - PARAMS.DS_ENTROPY);
-xdest_turbine = @(state1, state2, wout12) state1.psi - state2.psi - wout12;
-xdest_pump = @(state1, state2, win12) state2.psi - state1.psi + win12;
-xdest_mt = @(state1, state2, win12) state2.psi - state1.psi + win12;
+for i=1:12; states(i).psi = psi(states(i)); end  
 
-for i=1:12; states(i).psi = psi(states(i)); end  % exergy at each state
+% calculate exergy destroyed
+xdest_turbine = @(state1, state2, mflow, wout12)  mflow * (state1.psi - state2.psi) - wout12;
+xdest_pump    = @(state1, state2, mflow, win12)   mflow * (state2.psi - state1.psi) + win12;
+
+Wrev_turbine = @(state1, state2, mflow)  mflow * (state1.psi - state2.psi);
+Wrev_pump    = @(state1, state2, mflow)  mflow * (state2.psi - state1.psi);
 
 xdest.x12 = xdest_pump(states(1), states(2), energy.win12);
 xdest.x34 = xdest_pump(states(3), states(4), energy.win34);
