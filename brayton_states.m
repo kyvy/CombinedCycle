@@ -13,3 +13,5 @@ states(16).t = PARAMS.BRA_PEAK_TEMP/(PARAMS.BRA_PRESR^((PARAMS.K_AIR-1)/PARAMS.K
 states(17).t = PARAMS.BRA_MID_TEMP;
 
 massflowrate_b = energy.Qin/(PARAMS.CP_AIR*(states(16).t-states(17).t));    %not sure if i can call energy.Qin from here. (from rankine_energy)
+
+end
