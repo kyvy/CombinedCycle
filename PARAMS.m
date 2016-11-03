@@ -7,7 +7,7 @@ PEAK_PRES = 160;          % operating pres. of high-p turbine (bar)
 PROC_HEAT_PRES = 6.89476; % process heat pressure (bar)
 
 DS_TEMP = PARAMS.REJECT_TEMP;  % dead state temperature (K)
-DS_PRES = 1.01;         % dead state pressure (bar)
+DS_PRES = 1.01;                % dead state pressure (bar)
 DS_ENTROPY = xsteam('s_pT', PARAMS.DS_TEMP, PARAMS.DS_PRES);
 DS_ENTHALPY = xsteam('h_pT', PARAMS.DS_TEMP, PARAMS.DS_PRES);
 
