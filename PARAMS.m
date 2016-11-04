@@ -2,12 +2,12 @@ classdef PARAMS
 % Class for storing constants/parameters 
 
 properties (Constant)
-REJECT_TEMP = 30 + 273;   % condenser rejection temp. (K)
+REJECT_TEMP = 30;         % condenser rejection temp. (degC)
 PEAK_PRES = 160;          % operating pres. of high-p turbine (bar)
 PROC_HEAT_PRES = 6.89476; % process heat pressure (bar)
 
 DS_TEMP = PARAMS.REJECT_TEMP;  % dead state temperature (K)
-DS_PRES = 1.01;         % dead state pressure (bar)
+DS_PRES = 1.01;                % dead state pressure (bar)
 DS_ENTROPY = xsteam('s_pT', PARAMS.DS_TEMP, PARAMS.DS_PRES);
 DS_ENTHALPY = xsteam('h_pT', PARAMS.DS_TEMP, PARAMS.DS_PRES);
 
@@ -22,6 +22,14 @@ FRAC_Z = PARAMS.PROC_HEAT_MASS_FLOW/PARAMS.MASS_FLOW;
 % isentropic efficencies
 ISEN_EFF_PUMP    = 0.75;
 ISEN_EFF_TURBINE = 0.90;  % can be 0.80, 0.85, 0.90
+
+% brayton cycle
+BRA_PRESR        = 16;       % pressure ratio on brayton cycle. (we can specify pressures later)
+BRA_PEAK_TEMP    = 1500;     % peak temp on brayton cycle (K)
+BRA_LOW_TEMP     = 300;      % temp before compressor (K)
+BRA_MID_TEMP     = 420;      % temp at turine exit (K)
+CP_AIR           = 1.005;    % air cp at 300K (Kj/Kg.K)
+K_AIR            = 1.4; 
 
 % costs
 COST_TURBINE   = turbine_cost(PARAMS.ISEN_EFF_TURBINE);
