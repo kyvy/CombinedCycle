@@ -1,11 +1,11 @@
 function [states, energy, xdest] = exergies(states, energy)
-% calculate exergy (psi) at each state and exergy destroyed (kW)
+% calculate exergy (psi) at each state and exergy destroyed
 
-% calculate exergy at each state
-psi = @(state) state.mfrac * ((state.h - PARAMS.DS_ENTHALPY) - PARAMS.DS_TEMP*(state.s - PARAMS.DS_ENTROPY));
+% calculate exergy at each state (kJ/kg)
+psi = @(state) state.mfrac * ((state.h - PARAMS.DS_ENTHALPY) - (PARAMS.DS_TEMP+273)*(state.s - PARAMS.DS_ENTROPY));
 for i=1:12; states(i).psi = psi(states(i)); end  
 
-% calculate exergy destroyed
+% calculate exergy destroyed (kJ/kg)
 xdest_turbine = @(state1, state2, wout12)  state1.mfrac * (state1.psi - state2.psi) - wout12;
 xdest_pump    = @(state1, state2, win12)   state1.mfrac * (state2.psi - state1.psi) + win12;
 

@@ -4,14 +4,13 @@ classdef PARAMS
 properties (Constant)
 REJECT_TEMP = 30;         % condenser rejection temp. (degC)
 PEAK_PRES = 160;          % operating pres. of high-p turbine (bar)
+PEAK_TEMP = 550;          % operating temp. of high-p turbine (degC)
 PROC_HEAT_PRES = 6.89476; % process heat pressure (bar)
 
-DS_TEMP = PARAMS.REJECT_TEMP;  % dead state temperature (K)
-DS_PRES = 1.01;                % dead state pressure (bar)
+DS_TEMP = PARAMS.REJECT_TEMP;               % dead state temperature (degC)
+DS_PRES = xsteam('psat_T', PARAMS.DS_TEMP); % dead state pressure (bar)
 DS_ENTROPY = xsteam('s_pT', PARAMS.DS_TEMP, PARAMS.DS_PRES);
 DS_ENTHALPY = xsteam('h_pT', PARAMS.DS_TEMP, PARAMS.DS_PRES);
-
-PEAK_TEMP = 550;  % (degC)
 
 MASS_FLOW = 60;             % flow rate through condenser (kg/s)
 PROC_HEAT_MASS_FLOW = 31.5; % flow rate of supplied steam (kg/s)
