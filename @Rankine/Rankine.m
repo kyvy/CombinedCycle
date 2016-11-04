@@ -1,10 +1,14 @@
-classdef Rankine < handle
+classdef Rankine < RankineCommon 
 properties
     states
     energy
     xdest
     mfrac
+end
 
+properties (Access = private)
+    bisectp
+    bisectm
 end
 
 methods
@@ -13,6 +17,11 @@ methods
         obj.states.isn(16) = struct('p',[],'t',[],'x',[],'v',[],'h',[],'s',[], 'psi',[]);
         obj.states.act(16) = struct('p',[],'t',[],'x',[],'v',[],'h',[],'s',[], 'psi',[]);
         
+        % Initialize bisection classes with allowable error
+        obj.bisectp = BisectPressure(1e-6);
+        obj.bisectm = BisectMassFraction(1e-6);
+        
+        % calculate states
         obj.states_isn();
         obj.states_act();
         

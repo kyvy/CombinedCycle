@@ -1,4 +1,4 @@
-classdef PressureBisection < handle
+classdef BisectPressure < RankineCommon
 % Given a desired temperature and entropy solve for pressure using the
 % bisect method.
     
@@ -13,7 +13,7 @@ properties
 end
     
 methods
-    function obj = PressureBisection(allowable_error)
+    function obj = BisectPressure(allowable_error)
         % PressureBisection(allowable_error)
         % 
         % allowable_error: 

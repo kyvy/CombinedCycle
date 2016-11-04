@@ -1,9 +1,6 @@
 function [] = states_isn(obj)
 % find isentropic rankine obj.states.isn
 
-bisectp = PressureBisection(1e-6);      % Initialize with allowable error
-bisectm = MassFractionBisection(1e-6);  % Initialize with allowable error
-
 pump_enthalpy = @(state1, state2) state1.h + state1.v*(state2.p*100 - state1.p*100);
 
 
@@ -42,7 +39,7 @@ obj.states.isn(11).h = xsteam('h_ps', obj.states.isn(11).p, obj.states.isn(11).s
 obj.states.isn(11).t = xsteam('T_ph', obj.states.isn(11).p, obj.states.isn(11).h);
 
 obj.states.isn(9).s = obj.states.isn(10).s;
-obj.states.isn(9) = bisectp.set(obj.states.isn(9), 550, 3, 30).solve();
+obj.states.isn(9) = obj.bisectp.set(obj.states.isn(9), 550, 3, 30).solve();
 
 obj.states.isn(8).p = obj.states.isn(9).p;
 obj.states.isn(8).s = obj.states.isn(7).s;
@@ -63,7 +60,7 @@ obj.states.isn(6).t = xsteam('T_ph', obj.states.isn(6).p, obj.states.isn(6).h);
 
 obj.states.isn(3).p = obj.states.isn(2).p;
 obj.states.isn(4).p = obj.states.isn(9).p;
-[obj.states.isn, obj.mfrac.isn] = bisectm.set(obj.states.isn, PARAMS.FRAC_Z, 100, 1000).solve();
+[obj.states.isn, obj.mfrac.isn] = obj.bisectm.set(obj.states.isn, PARAMS.FRAC_Z, 100, 1000).solve();
 end
 
 

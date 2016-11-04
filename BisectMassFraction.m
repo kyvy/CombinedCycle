@@ -1,4 +1,4 @@
-classdef MassFractionBisection < handle
+classdef BisectMassFraction < RankineCommon
 % Find state three given a desired (actual) mass flow fraction (z) through 
 % the process heater  
     
@@ -15,7 +15,7 @@ properties
 end
     
 methods
-    function obj = MassFractionBisection(allowable_error)
+    function obj = BisectMassFraction(allowable_error)
         if nargin == 1; obj.allowable_error = allowable_error;
         else obj.allowable_error = 1e-6; 
         end
@@ -93,9 +93,9 @@ methods (Access = private)
     end
     
     function [z] = mfz_actual(obj)
-        state2a = pump_actual(obj.states(1), obj.states(2));
-        state4a = pump_actual(obj.states(3), obj.states(4));
-        state8a  = turbine_actual(obj.states(7), obj.states(8));
+        state2a = obj.pump_actual(obj.states(1), obj.states(2));
+        state4a = obj.pump_actual(obj.states(3), obj.states(4));
+        state8a = obj.turbine_actual(obj.states(7), obj.states(8));
         
         y = (obj.states(5).h - state4a.h)/(state8a.h - state4a.h);
         z = (1 - y)*(obj.states(3).h - state2a.h)/(obj.states(12).h - state2a.h);
