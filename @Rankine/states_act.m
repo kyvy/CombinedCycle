@@ -15,6 +15,9 @@ obj.states.act(10).x = xsteam('x_ph', obj.states.act(10).p, obj.states.act(10).h
 
 obj.mfrac.act.y = obj.mfy(obj.states.act);
 obj.mfrac.act.z = obj.mfz(obj.states.act, obj.mfrac.act.y);
+
+% mass fraction at each state
+obj.states.act = obj.state_mfracs(obj.states.act, obj.mfrac.act);
 end
 
 

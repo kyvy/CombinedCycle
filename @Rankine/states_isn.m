@@ -70,6 +70,9 @@ obj.states.isn(3).p = obj.states.isn(2).p;
 obj.states.isn(4).p = obj.states.isn(9).p;
 [obj.states.isn, obj.mfrac.isn] = obj.bisectm.set(obj.states.isn, PARAMS.FRAC_Z, 100, 1000).solve();
 obj.states.isn(4).v = xsteam('v_ph', obj.states.isn(4).p, obj.states.isn(4).h);
+
+% mass fraction at each state
+obj.states.isn = obj.state_mfracs(obj.states.isn, obj.mfrac.isn);
 end
 
 

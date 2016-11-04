@@ -4,6 +4,7 @@ properties
     energy
     xdest
     mfrac
+    eff
 end
 
 properties (Access = private)
@@ -25,8 +26,9 @@ methods
         obj.states_isn();
         obj.states_act();
         
-        obj.energy = obj.energies(obj.states.act, obj.mfrac.act);
-        [obj.states.act, obj.energy, obj.xdest] = obj.exergies(obj.states.act, obj.energy, obj.mfrac.act);
+        obj.energy = obj.energies(obj.states.act);
+        [obj.states.act, obj.energy, obj.xdest] = obj.exergies(obj.states.act, obj.energy);
+        [obj.eff] = obj.efficiencies(obj.states.act, obj.energy)
     end
 end
 
@@ -34,14 +36,13 @@ end
 methods (Access = private)
     states_isn(obj)
     states_act(obj)
-    
-    efficiencies(obj, states)
 end
 
 
 methods (Static)
-    [states, energy, xdest] = exergies(states, energy, mfrac)
-    [energy] = energies(states, mfrac)
+    [energy] = energies(states)
+    [states, energy, xdest] = exergies(states, energy)
+    [eff] = efficiencies(states, energy)
 end
     
 end
