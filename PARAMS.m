@@ -2,7 +2,7 @@ classdef PARAMS
 % Class for storing constants/parameters 
 
 properties (Constant)
-REJECT_TEMP = 30 + 273;   % condenser rejection temp. (K)
+REJECT_TEMP = 30;         % condenser rejection temp. (degC)
 PEAK_PRES = 160;          % operating pres. of high-p turbine (bar)
 PROC_HEAT_PRES = 6.89476; % process heat pressure (bar)
 

@@ -26,7 +26,7 @@ methods
         obj.states_act();
         
         obj.energy = obj.energies(obj.states.act, obj.mfrac.act);
-        [obj.states.act, obj.xdest] = obj.exergies(obj.states.act, obj.energy, obj.mfrac.act);
+        [obj.states.act, obj.energy, obj.xdest] = obj.exergies(obj.states.act, obj.energy, obj.mfrac.act);
     end
 end
 
@@ -40,7 +40,7 @@ end
 
 
 methods (Static)
-    [states, xdest] = exergies(states, energy, mfrac);
+    [states, energy, xdest] = exergies(states, energy, mfrac)
     [energy] = energies(states, mfrac)
 end
     

@@ -5,15 +5,16 @@ classdef BisectMassFraction < RankineCommon
 properties (Access = private)
     goal_z, allowable_error
     min_h3, max_h3
-    z_actual
+    z_actual % actual mass fraction z
     
+    % calculate enthalpy after pumping from state 1 to 2
     pump_enthalpy = @(state1, state2) state1.h + state1.v*(state2.p*100 - state1.p*100);
 end
 
 properties
     states
     iters % iterations
-    y, z  % mass fractions
+    y, z  % isentropic mass fractions
 end
     
 methods
@@ -77,7 +78,6 @@ methods (Access = private)
         % calculate and return actual mass flow fraction z
         z = obj.mfz_actual();
     end
-    
     
     function [z_error] = error(obj)
         z_error = abs((obj.z_actual - obj.goal_z)/obj.z_actual);
