@@ -14,8 +14,8 @@ end
 methods
     function obj = Rankine()
         % initialize state vectors
-        obj.states.isn(16) = struct('p',[],'t',[],'x',[],'v',[],'h',[],'s',[], 'psi',[]);
-        obj.states.act(16) = struct('p',[],'t',[],'x',[],'v',[],'h',[],'s',[], 'psi',[]);
+        obj.states.isn(16) = obj.emptystate();
+        obj.states.act(16) = obj.emptystate();
         
         % Initialize bisection classes with allowable error
         obj.bisectp = BisectPressure(1e-6);

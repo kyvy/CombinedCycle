@@ -6,6 +6,8 @@ properties (Access = private)
     goal_z, allowable_error
     min_h3, max_h3
     z_actual
+    
+    pump_enthalpy = @(state1, state2) state1.h + state1.v*(state2.p*100 - state1.p*100);
 end
 
 properties
@@ -69,44 +71,31 @@ methods (Access = private)
         assert(isfinite(obj.states(4).h), 'State does not exist.')
         
         % update isentropic mass flow fractions
-        obj.mfy();
-        obj.mfz();
+        obj.y = obj.mfy(obj.states);
+        obj.z = obj.mfz(obj.states, obj.y);
         
         % calculate and return actual mass flow fraction z
         z = obj.mfz_actual();
     end
     
     
-    
     function [z_error] = error(obj)
         z_error = abs((obj.z_actual - obj.goal_z)/obj.z_actual);
     end
     
-    function [y] = mfy(obj)
-        y = (obj.states(5).h - obj.states(4).h)/(obj.states(8).h - obj.states(4).h);
-        obj.y = y;
-    end
-    
-    function [z] = mfz(obj)
-        z = (1 - obj.y)*(obj.states(3).h - obj.states(2).h)/(obj.states(12).h - obj.states(2).h);
-        obj.z = z;
-    end
-    
-    function [z] = mfz_actual(obj)
-        state2a = obj.pump_actual(obj.states(1), obj.states(2));
-        state4a = obj.pump_actual(obj.states(3), obj.states(4));
-        state8a = obj.turbine_actual(obj.states(7), obj.states(8));
-        
-        y = (obj.states(5).h - state4a.h)/(state8a.h - state4a.h);
-        z = (1 - y)*(obj.states(3).h - state2a.h)/(obj.states(12).h - state2a.h);
-        obj.z_actual = z;
+    function [z_act] = mfz_actual(obj)
+        states_act(2)  = obj.pump_actual(obj.states(1), obj.states(2));
+        states_act(4)  = obj.pump_actual(obj.states(3), obj.states(4));
+        states_act(8)  = obj.turbine_actual(obj.states(7), obj.states(8));
+        states_act(3)  = obj.states(3);
+        states_act(5)  = obj.states(5);
+        states_act(12) = obj.states(12);
+
+        y_act = obj.mfy(states_act);
+        z_act = obj.mfz(states_act, y_act);
+        obj.z_actual = z_act;
     end
     
 end
 
-methods (Static, Access = private)
-    function [h] = pump_enthalpy(state1, state2)
-        h = state1.h + state1.v*(state2.p*100 - state1.p*100);
-    end
-end 
 end
