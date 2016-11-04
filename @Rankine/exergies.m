@@ -6,8 +6,8 @@ psi = @(state) state.mfrac * ((state.h - PARAMS.DS_ENTHALPY) - (PARAMS.DS_TEMP+2
 for i=1:12; states(i).psi = psi(states(i)); end  
 
 % calculate exergy destroyed (kJ/kg)
-xdest_turbine = @(state1, state2, wout12)  state1.mfrac * (state1.psi - state2.psi) - wout12;
-xdest_pump    = @(state1, state2, win12)   state1.mfrac * (state2.psi - state1.psi) + win12;
+xdest_turbine = @(state1, state2, wout12)  state1.psi - state2.psi - wout12;
+xdest_pump    = @(state1, state2, win12)   state2.psi - state1.psi + win12;
 
 xdest.x12 = xdest_pump(states(1), states(2), energy.win12);
 xdest.x34 = xdest_pump(states(3), states(4), energy.win34);

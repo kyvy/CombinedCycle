@@ -28,7 +28,7 @@ methods
         
         obj.energy = obj.energies(obj.states.act);
         [obj.states.act, obj.energy, obj.xdest] = obj.exergies(obj.states.act, obj.energy);
-        [obj.eff] = obj.efficiencies(obj.states.act, obj.energy)
+        [obj.eff] = obj.efficiencies(obj.states.act, obj.energy);
     end
 end
 
@@ -39,7 +39,7 @@ methods (Access = private)
 end
 
 
-methods (Static)
+methods (Static, Access = private)
     [energy] = energies(states)
     [states, energy, xdest] = exergies(states, energy)
     [eff] = efficiencies(states, energy)
