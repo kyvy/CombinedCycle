@@ -6,7 +6,7 @@ rankine = Rankine();
 %% Energy
 
 mass_brayton = brayton_states(rankine.energy)
-
+tsplot()
 %energy_b.brayton = brayton_energy(mass_brayton)
 % hey Gui. could you write something similar to Rankine() ? eg:
 % brayton = Brayton()
