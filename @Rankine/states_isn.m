@@ -15,6 +15,7 @@ obj.states.isn(2).p = PARAMS.PROC_HEAT_PRES;
 obj.states.isn(2).h = pump_enthalpy(obj.states.isn(1), obj.states.isn(2));
 obj.states.isn(2).s = xsteam('s_ph', obj.states.isn(2).p, obj.states.isn(2).h);
 obj.states.isn(2).t = xsteam('T_ph', obj.states.isn(2).p, obj.states.isn(2).h);
+obj.states.isn(2).v = xsteam('v_ph', obj.states.isn(2).p, obj.states.isn(2).h);
 
 obj.states.isn(12).p = obj.states.isn(2).p;
 obj.states.isn(12).x = 0;
@@ -34,6 +35,7 @@ obj.states.isn(10).x = 0.90;
 obj.states.isn(10).h = xsteam('h_px', obj.states.isn(10).p, obj.states.isn(10).x);
 obj.states.isn(10).s = xsteam('s_ph', obj.states.isn(10).p, obj.states.isn(10).h);
 obj.states.isn(10).t = xsteam('T_ph', obj.states.isn(10).p, obj.states.isn(10).h);
+obj.states.isn(10).v = xsteam('v_ph', obj.states.isn(10).p, obj.states.isn(10).h);
 
 obj.states.isn(11).p = obj.states.isn(2).p;
 obj.states.isn(11).s = obj.states.isn(10).s;
@@ -49,6 +51,7 @@ obj.states.isn(8).p = obj.states.isn(9).p;
 obj.states.isn(8).s = obj.states.isn(7).s;
 obj.states.isn(8).t = xsteam('T_ps', obj.states.isn(8).p, obj.states.isn(8).s);
 obj.states.isn(8).h = xsteam('h_pT', obj.states.isn(8).p, obj.states.isn(8).t);
+obj.states.isn(8).v = xsteam('v_ph', obj.states.isn(8).p, obj.states.isn(8).h);
 
 obj.states.isn(5).p = obj.states.isn(9).p;
 obj.states.isn(5).x = 0;
@@ -61,10 +64,12 @@ obj.states.isn(6).p = obj.states.isn(7).p;
 obj.states.isn(6).h = pump_enthalpy(obj.states.isn(5), obj.states.isn(6));
 obj.states.isn(6).s = xsteam('s_ph', obj.states.isn(6).p, obj.states.isn(6).h);
 obj.states.isn(6).t = xsteam('T_ph', obj.states.isn(6).p, obj.states.isn(6).h);
+obj.states.isn(6).v = xsteam('v_ph', obj.states.isn(6).p, obj.states.isn(6).h);
 
 obj.states.isn(3).p = obj.states.isn(2).p;
 obj.states.isn(4).p = obj.states.isn(9).p;
 [obj.states.isn, obj.mfrac.isn] = obj.bisectm.set(obj.states.isn, PARAMS.FRAC_Z, 100, 1000).solve();
+obj.states.isn(4).v = xsteam('v_ph', obj.states.isn(4).p, obj.states.isn(4).h);
 end
 
 
