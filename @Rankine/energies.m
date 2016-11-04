@@ -12,7 +12,7 @@ energy.qin   = energy.qin67 + energy.qin89;
 energy.qout  = (1-mf.y-mf.z)*(states(10).h - states(1).h);
 
 energy.win12 = win_pump(states(1), states(2), 1-mf.y-mf.z);
-energy.win34 = win_pump(states(2), states(3), 1-mf.y);
+energy.win34 = win_pump(states(3), states(4), 1-mf.y);
 energy.win56 = win_pump(states(5), states(6), 1);
 energy.win   = energy.win12 + energy.win34 + energy.win56;
 
