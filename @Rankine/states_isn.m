@@ -1,7 +1,7 @@
 function [] = states_isn(obj)
 % find isentropic rankine obj.states.isn
 
-pump_enthalpy = @(state1, state2) state1.h + state1.v*(state2.p*100 - state1.p*100);
+pump_enthalpy = @(state1, state2) state1.h + state1.v*(state2.p - state1.p);
 
 
 obj.states.isn(1).p = xsteam('psat_T', PARAMS.REJECT_TEMP); % Tsat at 30 degC

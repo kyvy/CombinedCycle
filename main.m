@@ -27,4 +27,4 @@ mass_brayton = brayton_states(rankine.energy)
 
 
 
-% tsplot()
+tsplot()
