@@ -1,4 +1,4 @@
-function [massflowrate_b] = brayton_states(energy)
+function [massflowrate_b] = brayton_states(rankine_cycle)
 % Temperature on brayton cycle
 
 
@@ -12,6 +12,6 @@ states_b(16).t = PARAMS.BRA_PEAK_TEMP/(PARAMS.BRA_PRESR^((PARAMS.K_AIR-1)/PARAMS
 
 states_b(17).t = PARAMS.BRA_MID_TEMP;
 
-massflowrate_b = energy.Qin/(PARAMS.CP_AIR*(states_b(16).t-states_b(17).t));    %not sure if i can call energy.Qin from here. (from rankine_energy)
+massflowrate_b = rankine_cycle.total.Qin/(PARAMS.CP_AIR*(states_b(16).t-states_b(17).t));    %not sure if i can call energy.Qin from here. (from rankine_energy)
 
 end
