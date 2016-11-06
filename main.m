@@ -1,17 +1,15 @@
 clc, clear all, close all
+addpath('RankineStates/')     % Code for finding rankine cycle states
+addpath('RankineComponents/') % Code for rankine cycle component analysis
 %% Combined Gas-Vapor Cycle Analysis
 
 rankine = Rankine();
 
-%% Energy
-
-% mass_brayton = brayton_states(rankine.energy)
+mass_brayton = brayton_states(rankine)
 
 %energy_b.brayton = brayton_energy(mass_brayton)
 % hey Gui. could you write something similar to Rankine() ? eg:
 % brayton = Brayton()
-
-
 
 %% Finances
 
@@ -20,11 +18,6 @@ rankine = Rankine();
 %% Piping Network
 
 
-
-
-
-%%
-
-
+%% Plotting
 
 tsplot(rankine.states.isn)

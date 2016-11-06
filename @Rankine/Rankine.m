@@ -1,10 +1,18 @@
 classdef Rankine < RankineCommon 
 properties
     states
-    energy
-    xdest
+    
+    % overall cycle
+    total
     mfrac
-    eff
+    
+    % component analysis
+    pump
+    turbine
+    openFWH   % mixing and open feedwater heater
+    procheat  % process heater
+    heatx     % heat exchanger (or boiler)
+    condenser
 end
 
 properties (Access = private)
@@ -17,19 +25,24 @@ methods
         % initialize state vectors
         obj.states.isn(16) = obj.emptystate();
         obj.states.act(16) = obj.emptystate();
-        
+
         % Initialize bisection classes with allowable error
         obj.bisectp = BisectPressure(1e-6);
         obj.bisectm = BisectMassFraction(1e-6);
-        
+
         % calculate states
         obj.states_isn();
         obj.states_act();
+
+        % component analysis
+        [obj.pump,     ...
+         obj.turbine,  ...
+         obj.openFWH,  ... 
+         obj.procheat, ...
+         obj.heatx,    ...
+         obj.condenser] = obj.component_analysis(obj.states.act);
         
-%         RankineComponents(obj.states.act)
-%         obj.energy = obj.energies(obj.states.act);
-%         [obj.states.act, obj.energy, obj.xdest] = obj.exergies(obj.states.act, obj.energy);
-%         [obj.eff] = obj.efficiencies(obj.states.act, obj.energy);
+        obj.cycle_analysis();
     end
 end
 
@@ -37,13 +50,13 @@ end
 methods (Access = private)
     states_isn(obj)
     states_act(obj)
+    
+    cycle_analysis(obj)
 end
 
 
 methods (Static, Access = private)
-    [energy] = energies(states)
-    [states, energy, xdest] = exergies(states, energy)
-    [eff] = efficiencies(states, energy)
+    [pump, turbine, procheat, openFWH, heatx, condenser] = component_analysis(states)
 end
     
 end
