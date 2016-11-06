@@ -1,9 +1,6 @@
 function [] = states_isn(obj)
 % find isentropic rankine obj.states.isn
 
-pump_enthalpy = @(state1, state2) state1.h + state1.v*(state2.p - state1.p);
-
-
 obj.states.isn(1).p = xsteam('psat_T', PARAMS.REJECT_TEMP); % Tsat at 30 degC
 obj.states.isn(1).x = 0;
 obj.states.isn(1).h = xsteam('h_px', obj.states.isn(1).p, obj.states.isn(1).x);
@@ -11,11 +8,11 @@ obj.states.isn(1).s = xsteam('s_ph', obj.states.isn(1).p, obj.states.isn(1).h);
 obj.states.isn(1).v = xsteam('v_ph', obj.states.isn(1).p, obj.states.isn(1).h);
 obj.states.isn(1).t = xsteam('T_ph', obj.states.isn(1).p, obj.states.isn(1).h);
 
-obj.states.isn(2).p = PARAMS.PROC_HEAT_PRES;  
-obj.states.isn(2).h = pump_enthalpy(obj.states.isn(1), obj.states.isn(2));
-obj.states.isn(2).s = xsteam('s_ph', obj.states.isn(2).p, obj.states.isn(2).h);
-obj.states.isn(2).t = xsteam('T_ph', obj.states.isn(2).p, obj.states.isn(2).h);
-obj.states.isn(2).v = xsteam('v_ph', obj.states.isn(2).p, obj.states.isn(2).h);
+obj.states.isn(2).p = PARAMS.PROC_HEAT_PRES;
+obj.states.isn(2).s = obj.states.isn(1).s;
+obj.states.isn(2).h = xsteam('h_ps', obj.states.isn(2).p, obj.states.isn(2).s);
+obj.states.isn(2).t = xsteam('T_ps', obj.states.isn(2).p, obj.states.isn(2).s);
+obj.states.isn(2).v = xsteam('v_ps', obj.states.isn(2).p, obj.states.isn(2).s);
 
 obj.states.isn(12).p = obj.states.isn(2).p;
 obj.states.isn(12).x = 0;
@@ -28,7 +25,7 @@ obj.states.isn(7).p = PARAMS.PEAK_PRES;
 obj.states.isn(7).t = PARAMS.PEAK_TEMP;
 obj.states.isn(7).h = xsteam('h_pT', obj.states.isn(7).p, obj.states.isn(7).t);
 obj.states.isn(7).s = xsteam('s_pT', obj.states.isn(7).p, obj.states.isn(7).t);
-obj.states.isn(7).v = xsteam('v_ph', obj.states.isn(7).p, obj.states.isn(7).h);
+obj.states.isn(7).v = xsteam('v_pT', obj.states.isn(7).p, obj.states.isn(7).t);
 
 obj.states.isn(10).p = obj.states.isn(1).p;
 obj.states.isn(10).x = 0.90;
@@ -61,18 +58,21 @@ obj.states.isn(5).v = xsteam('v_ph', obj.states.isn(5).p, obj.states.isn(5).h);
 obj.states.isn(5).t = xsteam('T_ph', obj.states.isn(5).p, obj.states.isn(5).h);
 
 obj.states.isn(6).p = obj.states.isn(7).p;
-obj.states.isn(6).h = pump_enthalpy(obj.states.isn(5), obj.states.isn(6));
-obj.states.isn(6).s = xsteam('s_ph', obj.states.isn(6).p, obj.states.isn(6).h);
-obj.states.isn(6).t = xsteam('T_ph', obj.states.isn(6).p, obj.states.isn(6).h);
-obj.states.isn(6).v = xsteam('v_ph', obj.states.isn(6).p, obj.states.isn(6).h);
+obj.states.isn(6).s = obj.states.isn(5).s;
+obj.states.isn(6).h = xsteam('h_ps', obj.states.isn(6).p, obj.states.isn(6).s);
+obj.states.isn(6).t = xsteam('T_ps', obj.states.isn(6).p, obj.states.isn(6).s);
+obj.states.isn(6).v = xsteam('v_ps', obj.states.isn(6).p, obj.states.isn(6).s);
 
 obj.states.isn(3).p = obj.states.isn(2).p;
 obj.states.isn(4).p = obj.states.isn(9).p;
 [obj.states.isn, obj.mfrac.isn] = obj.bisectm.set(obj.states.isn, PARAMS.FRAC_Z, 100, 1000).solve();
-obj.states.isn(4).v = xsteam('v_ph', obj.states.isn(4).p, obj.states.isn(4).h);
+obj.states.isn(4).v = xsteam('v_ps', obj.states.isn(4).p, obj.states.isn(4).s);
 
 % mass fraction at each state
 obj.states.isn = obj.state_mfracs(obj.states.isn, obj.mfrac.isn);
+
+% calculate exergy at each state
+for i=1:12; obj.states.isn(i).psi = obj.psi(obj.states.isn(i)); end
 end
 
 

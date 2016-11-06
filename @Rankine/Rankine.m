@@ -26,9 +26,10 @@ methods
         obj.states_isn();
         obj.states_act();
         
-        obj.energy = obj.energies(obj.states.act);
-        [obj.states.act, obj.energy, obj.xdest] = obj.exergies(obj.states.act, obj.energy);
-        [obj.eff] = obj.efficiencies(obj.states.act, obj.energy);
+%         RankineComponents(obj.states.act)
+%         obj.energy = obj.energies(obj.states.act);
+%         [obj.states.act, obj.energy, obj.xdest] = obj.exergies(obj.states.act, obj.energy);
+%         [obj.eff] = obj.efficiencies(obj.states.act, obj.energy);
     end
 end
 

@@ -5,7 +5,7 @@ properties (Constant)
 REJECT_TEMP = 30;         % condenser rejection temp. (degC)
 PEAK_PRES = 160;          % operating pres. of high-p turbine (bar)
 PEAK_TEMP = 550;          % operating temp. of high-p turbine (degC)
-PROC_HEAT_PRES = 6.89476; % process heat pressure (bar)
+PROC_HEAT_PRES = 6.89476; % process heat pressure (bar) [100 psi]
 
 DS_TEMP = 11;             % dead state temperature (degC)
 DS_PRES = xsteam('psat_T', PARAMS.DS_TEMP); % dead state pressure (bar)

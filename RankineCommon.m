@@ -9,6 +9,9 @@ properties (Constant, Access = protected)
     % calculate mass fractions
     mfy = @(states) (states(5).h - states(4).h)/(states(8).h - states(4).h);
     mfz = @(states, y) (1 - y)*(states(3).h - states(2).h)/(states(12).h - states(2).h);
+    
+    % calculate flow exergy at a state
+    psi = @(state) (state.h - PARAMS.DS_ENTHALPY) - PARAMS.DS_TEMP*(state.s - PARAMS.DS_ENTROPY);
 end
 
 methods (Static, Access = protected)
