@@ -4,11 +4,11 @@ function [massflowrate_b] = brayton_states(rankine_cycle)
 
 states_b(13).t = PARAMS.BRA_LOW_TEMP;
 
-states_b(14).t = PARAMS.BRA_LOW_TEMP*(PARAMS.BRA_PRESR^((PARAMS.K_AIR-1)/PARAMS.K_AIR));
+states_b(14).t = PARAMS.BRA_LOW_TEMP*(PARAMS.BRA_RP^((PARAMS.K_AIR-1)/PARAMS.K_AIR));
 
 states_b(15).t = PARAMS.BRA_PEAK_TEMP;
 
-states_b(16).t = PARAMS.BRA_PEAK_TEMP/(PARAMS.BRA_PRESR^((PARAMS.K_AIR-1)/PARAMS.K_AIR));
+states_b(16).t = PARAMS.BRA_PEAK_TEMP/(PARAMS.BRA_RP^((PARAMS.K_AIR-1)/PARAMS.K_AIR));
 
 states_b(17).t = PARAMS.BRA_MID_TEMP;
 
