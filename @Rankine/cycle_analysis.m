@@ -1,8 +1,8 @@
 function [] = cycle_analysis(obj)
 % Overall rankine cycle analysis.
 
-% total destroyed exergy
-obj.total.xdest = sum([ ...
+% cycle destroyed exergy
+obj.cycle.xdest = sum([ ...
     obj.pump.xdest,     ...
     obj.turbine.xdest,  ...
     obj.openFWH.xdest,  ... 
@@ -10,8 +10,8 @@ obj.total.xdest = sum([ ...
     obj.heatx.xdest,    ...
     obj.condenser.xdest]);
 
-% total generated entropy
-obj.total.xdest = sum([ ...
+% cycle generated entropy
+obj.cycle.sgen = sum([ ...
     obj.pump.sgen,      ...
     obj.turbine.sgen,   ...
     obj.openFWH.sgen,   ... 
@@ -19,24 +19,34 @@ obj.total.xdest = sum([ ...
     obj.heatx.sgen,     ...
     obj.condenser.sgen]);
 
-% total work input
-obj.total.Win = sum([obj.pump.win]);
-obj.total.Win_rev = sum([obj.pump.win_rev]);
+% cycle work input
+obj.cycle.Win = sum([obj.pump.win]);
+obj.cycle.Win_rev = sum([obj.pump.win_rev]);
 
-% total work output
-obj.total.Wout = sum([obj.turbine.wout]);
-obj.total.Wout_rev = sum([obj.turbine.wout_rev]);
+% cycle work output
+obj.cycle.Wout = sum([obj.turbine.wout]);
+obj.cycle.Wout_rev = sum([obj.turbine.wout_rev]);
 
-% total heat input
-obj.total.Qin = sum([obj.heatx.Qin]);
+% cycle net work output
+obj.cycle.Wnet = obj.cycle.Wout - obj.cycle.Win;
 
-% total heat output
-obj.total.Qout = sum([  ...
+% cycle heat input
+obj.cycle.Qin = sum([obj.heatx.Qin]);
+
+% cycle heat output
+obj.cycle.Qout = sum([  ...
     obj.condenser.Qout, ... 
     obj.procheat.Qout]);
 
 % overall second law efficiency
-obj.total.eff2 = obj.total.Wout/obj.total.Wout_rev;
+obj.cycle.eff2 = obj.cycle.Wout/obj.cycle.Wout_rev;
+
+% thermal efficiency
+obj.cycle.effth = 1 - obj.condenser.Qout/obj.cycle.Qin;
+
+% utilization factor
+obj.cycle.utilf = (obj.cycle.Wnet + obj.procheat.Qout)/obj.cycle.Qin;
+
 
 end
 

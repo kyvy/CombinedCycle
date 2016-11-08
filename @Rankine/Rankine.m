@@ -3,7 +3,7 @@ properties
     states
     
     % overall cycle
-    total
+    cycle
     mfrac
     
     % component analysis
@@ -23,8 +23,8 @@ end
 methods
     function obj = Rankine()
         % initialize state vectors
-        obj.states.isn(16) = obj.emptystate();
-        obj.states.act(16) = obj.emptystate();
+        obj.states.isn(17) = obj.emptystate();
+        obj.states.act(17) = obj.emptystate();
 
         % Initialize bisection classes with allowable error
         obj.bisectp = BisectPressure(1e-6);
