@@ -1,13 +1,8 @@
 classdef Brayton < handle
 properties
     states
-    mflow % mass flow rate
-    power
-    heat
-    
-    % component analysis
-    compressor
-    turbine
+    mflow  % mass flow rate
+    energy
     
     % overall cycle analysis
     cycle
@@ -17,20 +12,27 @@ methods
     function obj = Brayton(rankine)
         obj.states = rankine.states;  % pass in states from rankine cycle
         
-        obj.states_isn(rankine)
-        
-%         % component analysis
-%         [obj.compressor, obj.turbine] = obj.component_analysis(obj.states.act);
+        obj.states_isn() % find isentropic enthalpies, temps
+%         obj.states_act() % find actual enthalpies, temps
+
+        % cycle anlysis
+        % find overall xdest, sgen, efficiencies (for the brayton cycle) 
+%         obj.cycle_analysis(rankine)
+
+%         % convert states from K and kPa to degC and bar to be consistent with
+%         % the rankine cycle states
+%         to_bar_degC(obj) 
     end
 end
 
 
 methods (Access = private)
-    cycle_analysis(obj)
-    states_isn(obj, rankine)
+    cycle_analysis(obj, rankine)
+    
+    states_isn(obj)
     states_act(obj)
     
-    to_bar_degC(obj) % convert from K and kPa to degC and bar
+    to_bar_degC(obj) 
 end
 
 methods (Static, Access = private)

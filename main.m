@@ -5,14 +5,8 @@ addpath('Plotting/')          % Code for plotting and plotting tools
 %% Combined Gas-Vapor Cycle Analysis
 
 rankine = Rankine();
-%%
 brayton = Brayton(rankine);
 
-% mass_brayton = brayton_states(rankine)
-
-%energy_b.brayton = brayton_energy(mass_brayton)
-% hey Gui. could you write something similar to Rankine() ? eg:
-% brayton = Brayton()
 
 %% Finances
 
