@@ -3,7 +3,7 @@ properties
     states
     
     % overall cycle
-    total
+    cycle
     mfrac
     
     % component analysis
