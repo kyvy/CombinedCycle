@@ -22,6 +22,7 @@ methods (Static)
         res.Qin   = PARAMS.MASS_FLOW * state1.mfrac * (state2.h - state1.h);
         res.Sgen  = HeatX.entropy_gen(state1, state2, res.Qin, Tin);
         res.Xdest = HeatX.exergy_dest(state1, state2, res.Qin, Tin);
+        res.Xheat = (1-PARAMS.DS_TEMP/Tin) * res.Qin;
     end
 end
     
