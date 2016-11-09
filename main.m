@@ -5,8 +5,8 @@ addpath('Plotting/')          % Code for plotting and plotting tools
 %% Combined Gas-Vapor Cycle Analysis
 
 rankine = Rankine();
-brayton = Brayton(rankine);
-combined = Combined(rankine, brayton);
+% brayton = Brayton(rankine);
+% combined = Combined(rankine, brayton);
 
 %% Finances
 
@@ -17,4 +17,4 @@ combined = Combined(rankine, brayton);
 
 %% Plotting
 
-% tsdiagram(rankine)
+tsdiagram(rankine)

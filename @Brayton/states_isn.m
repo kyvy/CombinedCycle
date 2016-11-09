@@ -7,9 +7,9 @@ function [] = states_isn(obj)
 % 17 -     after heat exchanger
 
 obj.states.isn(13).t = PARAMS.BRA_LOW_TEMP;
-obj.states.isn(14).t = obj.states.isn(13).t * PARAMS.BRA_RP ^ ((PARAMS.K_AIR-1)/PARAMS.K_AIR);
+obj.states.isn(14).t = obj.states.isn(13).t * PARAMS.BRA_PRESR ^ ((PARAMS.K_AIR-1)/PARAMS.K_AIR);
 obj.states.isn(15).t = PARAMS.BRA_PEAK_TEMP;
-obj.states.isn(16).t = obj.states.isn(15).t / ( PARAMS.BRA_RP ^ ((PARAMS.K_AIR-1)/PARAMS.K_AIR) );
+obj.states.isn(16).t = obj.states.isn(15).t / ( PARAMS.BRA_PRESR ^ ((PARAMS.K_AIR-1)/PARAMS.K_AIR) );
 
 % assume that the heat exchanger exit temp is 50 K below rankine peak temp
 obj.states.isn(17).t = PARAMS.PEAK_TEMP + 273 - 50; 
