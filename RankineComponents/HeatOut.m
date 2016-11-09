@@ -1,8 +1,8 @@
 classdef HeatOut
 % Given states before and after process heater find:
 %   Qout  - total heat supplied
-%   sgen  - entropy generated
-%   xdest - exergy destroyed
+%   Sgen  - entropy generated
+%   Xdest - exergy destroyed
 
 properties (Constant)
     entropy_gen = @(state1, state2, Qout, Tout) ...
@@ -16,8 +16,8 @@ end
 methods (Static)
     function [res] = solve(state1, state2, Tout)
         res.Qout  = PARAMS.MASS_FLOW * state1.mfrac * (state1.h - state2.h);
-        res.sgen  = HeatX.entropy_gen(state1, state2, res.Qout, Tout);
-        res.xdest = HeatX.exergy_dest(state1, state2, res.Qout, Tout);
+        res.Sgen  = HeatX.entropy_gen(state1, state2, res.Qout, Tout);
+        res.Xdest = HeatX.exergy_dest(state1, state2, res.Qout, Tout);
     end
 end
     
