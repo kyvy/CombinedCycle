@@ -38,16 +38,16 @@ obj.states.act(16).psi = obj.mflow*(PARAMS.CP_AIR*(obj.states.act(16).t-(PARAMS.
 obj.states.act(17).psi = obj.mflow*(PARAMS.CP_AIR*(obj.states.act(17).t-(PARAMS.DS_TEMP+273))-(PARAMS.DS_TEMP+273)*(PARAMS.CP_AIR*log(obj.states.act(17).t/(PARAMS.DS_TEMP+273))-0.287*log(1000/(PARAMS.DS_PRES*100))));
 
 %Entropy analysis
-obj.ds.comp = PARAMS.CP_AIR*log(obj.states.act(14).t/obj.states.act(13).t)-0.287*log(PARAMS.BRA_PRESR);
-obj.ds.boil = PARAMS.CP_AIR*log(obj.states.act(15).t/obj.states.act(14).t)-0.287*log(1);
-obj.ds.turb = PARAMS.CP_AIR*log(obj.states.act(16).t/obj.states.act(15).t)-0.287*log(1/PARAMS.BRA_PRESR);
-obj.ds.hx = PARAMS.CP_AIR*log(obj.states.act(17).t/obj.states.act(16).t)-0.287*log(1);
+obj.dS.comp = PARAMS.CP_AIR*log(obj.states.act(14).t/obj.states.act(13).t)-0.287*log(PARAMS.BRA_PRESR);
+obj.dS.boil = PARAMS.CP_AIR*log(obj.states.act(15).t/obj.states.act(14).t)-0.287*log(1);
+obj.dS.turb = PARAMS.CP_AIR*log(obj.states.act(16).t/obj.states.act(15).t)-0.287*log(1/PARAMS.BRA_PRESR);
+obj.dS.hx = PARAMS.CP_AIR*log(obj.states.act(17).t/obj.states.act(16).t)-0.287*log(1);
 
 %exergy destroyed
-obj.xdest.comp = (PARAMS.DS_TEMP+273)*obj.ds.comp;
-obj.xdest.boil = (PARAMS.DS_TEMP+273)*((obj.ds.boil*obj.mflow)-(obj.energy.Qin/obj.states.act(15).t));
-obj.xdest.turb = (PARAMS.DS_TEMP+273)*obj.ds.turb;
-obj.xdest.hx = (PARAMS.DS_TEMP+273)*((obj.ds.hx*obj.mflow)+(obj.energy.Qout/obj.states.act(17).t));
+obj.Xdest.comp = (PARAMS.DS_TEMP+273)*obj.dS.comp;
+obj.Xdest.boil = (PARAMS.DS_TEMP+273)*((obj.dS.boil*obj.mflow)-(obj.energy.Qin/obj.states.act(15).t));
+obj.Xdest.turb = (PARAMS.DS_TEMP+273)*obj.dS.turb;
+obj.Xdest.hx = (PARAMS.DS_TEMP+273)*((obj.dS.hx*obj.mflow)+(obj.energy.Qout/obj.states.act(17).t));
 
 %2nd law efficiencies
 obj.eff2.comp = (obj.states.act(14).psi-obj.states.act(13).psi)/obj.energy.Win;

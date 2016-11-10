@@ -39,8 +39,9 @@ obj.cycle.Qout = sum([  ...
     obj.procheat.Qout]);
 
 % overall second law efficiency
+% Xrecovered/Xexpended | 1 - Xdest/Xexp
 obj.cycle.Xexp = sum([obj.heatx.Xheat, obj.pump.Win]);
-obj.cycle.eff2 = obj.cycle.Wout/obj.cycle.Xexp; % Xrecovered/Xexpended
+obj.cycle.eff2 = (obj.cycle.Wout + obj.procheat.Xheat)/obj.cycle.Xexp; 
 
 % thermal efficiency
 obj.cycle.effth = 1 - obj.condenser.Qout/obj.cycle.Qin;

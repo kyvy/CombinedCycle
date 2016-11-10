@@ -18,6 +18,7 @@ methods (Static)
         res.Qout  = PARAMS.MASS_FLOW * state1.mfrac * (state1.h - state2.h);
         res.Sgen  = HeatX.entropy_gen(state1, state2, res.Qout, Tout);
         res.Xdest = HeatX.exergy_dest(state1, state2, res.Qout, Tout);
+        res.Xheat = (1 - PARAMS.DS_TEMP/Tout) * res.Qout;
     end
 end
     
