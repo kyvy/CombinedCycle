@@ -15,6 +15,8 @@ pressure_lines(rankine.states.act, s_curve, t_curve, 'r--')
 plot([rankine.states.isn.s], [rankine.states.isn.t], 's')
 plot([rankine.states.act.s], [rankine.states.act.t], 'v')
 
+xlabel('Entropy (kJ/kg degC)')
+ylabel('Temperature (degC)')
 
 end
 

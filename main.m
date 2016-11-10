@@ -6,7 +6,8 @@ addpath('Plotting/')          % Code for plotting and plotting tools
 
 rankine = Rankine();
 brayton = Brayton(rankine);
-
+%%
+combined = Combined(rankine, brayton);
 
 %% Finances
 
@@ -17,4 +18,4 @@ brayton = Brayton(rankine);
 
 %% Plotting
 
-% tsdiagram(rankine)
+tsdiagram(rankine)
