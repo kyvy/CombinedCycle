@@ -34,9 +34,7 @@ obj.cycle.Wnet = obj.cycle.Wout - obj.cycle.Win;
 obj.cycle.Qin = sum([obj.heatx.Qin]);
 
 % cycle heat output
-obj.cycle.Qout = sum([  ...
-    obj.condenser.Qout, ... 
-    obj.procheat.Qout]);
+obj.cycle.Qout = obj.condenser.Qout;
 
 % overall second law efficiency
 % Xrecovered/Xexpended | 1 - Xdest/Xexp

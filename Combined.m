@@ -24,11 +24,13 @@ methods
     function obj = Combined(rankine, brayton)
         
         % these can simply be summed together 
-        labels = {'Win' 'Wout' 'Qin' 'Qout'};
+        labels = {'Win' 'Wout'};
         for label = labels  % for each label in labels
             label = char(label);
             obj.(label) = rankine.cycle.(label) + brayton.energy.(label);
         end
+        obj.Qin = brayton.energy.Qin;
+        obj.Qout = rankine.cycle.Qout;
         obj.Wnet = obj.Wout - obj.Win;
         obj.Xdest = rankine.cycle.Xdest + sum([brayton.Xdest.comp, brayton.Xdest.boil, brayton.Xdest.turb, brayton.Xdest.hx]); % total Xdest
         
